@@ -1,0 +1,58 @@
+cmake_minimum_required(VERSION 3.18)
+project(NeoSkullKing)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_compile_options(-Wall)
+
+# === SFML ===
+find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
+
+# === ASIO ===
+# Supposons que tu as téléchargé ASIO (sans Boost), placé dans un dossier "asio" à la racine
+set(ASIO_PATH "${CMAKE_SOURCE_DIR}/asio/include")
+include_directories(${ASIO_PATH})
+
+# Définitions pour ASIO
+add_definitions(-DASIO_STANDALONE -D_WIN32_WINNT=0x0601)
+
+# === SOURCES COMMUNES ===
+set(COMMON_SRC
+    deck.cpp
+    joueur.cpp
+    jeu.cpp
+    affichage.cpp
+    partie.cpp
+    jcpu.cpp
+    partieSfml.cpp
+    network.cpp
+    SfmlServ.cpp
+)
+
+# === CLIENT ===
+add_executable(${PROJECT_NAME} ${COMMON_SRC})
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    sfml-graphics
+    sfml-window
+    sfml-system
+)
+
+# === SERVEUR ===
+add_executable(${PROJECT_NAME}-serveur
+    server/server.cpp
+    partie.cpp
+    joueur.cpp
+    deck.cpp
+    affichage.cpp
+    jcpu.cpp
+    partieSfml.cpp
+    SfmlServ.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}-serveur PRIVATE
+    sfml-graphics
+    sfml-window
+    sfml-system
+)
+
