@@ -418,7 +418,7 @@ void interieurC(RenderWindow &window,carte card,int x,int y,float taille) //tail
         }
         Sprite imgS(img);
         imgS.setOrigin(imgS.getLocalBounds().width/2,imgS.getLocalBounds().height/2); //centre l'image
-        imgS.setScale(scale,scale);
+        imgS.setScale(scale*taille,scale*taille);
         imgS.setPosition(x,y);
         window.draw(imgS);
 
@@ -625,7 +625,7 @@ void afficheTable(RenderWindow &window,int numJ,table t,int nbj,int cptr) //cart
             int posy = 200 + (taille.y * carteSize) / 2;
             carte.setPosition(cartePos,200);
             window.draw(carte);
-            interieurC(window,t[(premierJ+i)%nbj].carteActive,posx,posy,carteSize);
+            interieurC(window,t[(premierJ+i)%nbj].carteActive,posx,posy,1);
 
 
             cartePos+=taille.x*carteSize;
@@ -918,12 +918,13 @@ bool tigresse (RenderWindow &window)
                     tigresse=false;
                 }
                 window.clear();
-                afficheFond(window); //affiche le fond d'écran
+                
             }
         }
-        choixTigresse(window,tigresse);
 
         afficheFond(window);
+        choixTigresse(window,tigresse);
+
         window.draw(titre);
         window.draw(choix);
         window.display();
