@@ -1,58 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria&display=swap');
-@font-face 
-{
-    font-family: "Neon";
-    src: url("../assets/NeoNeon.ttf") format("truetype");
-} 
 
-body 
-{
-    margin: 0; 
-    background-image: url("../assets/wallpaper.png");
+@font-face {
+    font-family: "Neon";
+    src: url("NeoNeon.ttf") format("truetype");
+}
+
+body {
+    margin: 0;
+    background-image: url("wallpaper.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-size: cover; 
-    
+    background-size: cover;
+
     font-size: 22px;
 
     display: flex;
     flex-direction: column;
 }
 
-header 
-{
-    background-image: url("../assets/wallpaper.png");
+header {
+    background-image: url("wallpaper.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    height: 100px;
+    height: 250px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    position: sticky;
+    top: 0px;
 
-    
+    justify-content: left;
+
     font-family: 'Alexandria';
     font-size: 20px;
-    z-index: 10000;   
+    z-index: 10000;
 }
 
-header h1 
-{
+header h1 {
     color: #fff;
     font-size: 2.5em;
     margin: 0;
-    padding: 20px 0;
+    padding: 20px;
 }
 
-header nav 
-{
-    text-align: center;
-  
+header nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    gap: 40px;
+    padding-left: 45px;
     align-items: center;
 
     width: 100%;
@@ -62,51 +58,50 @@ header nav
     background-color: rgba(0, 0, 0, 0.255);
 }
 
-header p
-{
+header p {
     text-align: left;
-    padding-left : 50px;
+    padding-left: 50px;
     color: #fff;
     text-shadow: 1px 1px 2px rgb(180, 180, 180);
 }
 
-header h3
-{
+header h3 {
     color: #fff;
+    margin: 0;
     text-shadow: 1px 1px 2px rgb(180, 180, 180);
+    transition: transform 0.2s;
 }
 
-.title
-{
+header nav a:hover h3 {
+    transform: scale(1.05);
+}
+
+.title {
     font-family: 'Neon', sans-serif;
     text-align: left;
-    padding-left : 50px;
+    padding-left: 50px;
 }
 
-.title-orange
-{
-    font-size: 100px;
+.title-orange {
+    font-size: clamp(2rem, 8vw, 100px);
     color: #fff;
     text-align: center;
     animation: glow-orange 1s ease-in-out infinite alternate;
 }
 
-.title-blue
-{
-    font-size: 100px;
+.title-blue {
+    font-size: clamp(2rem, 8vw, 100px);
     color: #fff;
     text-align: center;
     animation: glow-blue 1s ease-in-out infinite alternate;
 }
 
-a 
-{
+a {
     text-decoration: none;
     font-size: 1.2em;
 }
 
-main
-{
+main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,16 +115,13 @@ main
     text-shadow: 1px 1px 2px rgb(180, 180, 180);
 }
 
-main .prst
-{
+main .prst {
     margin-top: auto;
-    padding-left: 25%;
-    padding-right: 25%;
+    padding: 5% 15%;
     text-align: center;
 }
 
-hr 
-{
+hr {
     border: none;
     height: 2px;
     background-color: #fff;
@@ -138,36 +130,84 @@ hr
 }
 
 .btn {
-  padding: 10px 20px;
-  background-color: #00AAFF;
-  border: none;
-  color: white;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
+    padding: 10px 20px;
+    background-color: #00AAFF;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn:hover {
-  background-color: #007acc;
-  box-shadow: 0 0 10px #00AAFF;
+    background-color: #007acc;
+    box-shadow: 0 0 10px #00AAFF;
 }
 
+.equipe {
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px #fff;
+}
+
+.img-projet {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Animations */
 @keyframes glow-orange {
-  from {
-    text-shadow: 0 0 2px #FF2D00, 0 0 3px #FF2D00, 0 0 4px #FF2D00, 0 0 5px #FF2D00, 0 0 6px #FF2D00, 0 0 7px #FF2D00, 0 0 8px #FF2D00;
-  }
-  to {
-    text-shadow: 0 0 2px #fff, 0 0 3px rgb(255, 99, 40), 0 0 4px rgb(255, 99, 40), 0 0 5px rgb(255, 99, 40), 0 0 6px rgb(255, 99, 40), 0 0 7px rgb(255, 99, 40), 0 0 8px rgb(255, 99, 40);
-  }
+    from {
+        text-shadow: 0 0 2px #FF2D00, 0 0 3px #FF2D00, 0 0 4px #FF2D00, 0 0 5px #FF2D00, 0 0 6px #FF2D00, 0 0 7px #FF2D00, 0 0 8px #FF2D00;
+    }
+    to {
+        text-shadow: 0 0 2px #fff, 0 0 3px rgb(255, 99, 40), 0 0 4px rgb(255, 99, 40), 0 0 5px rgb(255, 99, 40), 0 0 6px rgb(255, 99, 40), 0 0 7px rgb(255, 99, 40), 0 0 8px rgb(255, 99, 40);
+    }
 }
 
 @keyframes glow-blue {
-  from {
-    text-shadow: 0 0 2px #00AAFF, 0 0 3px #00AAFF, 0 0 4px #00AAFF, 0 0 5px #00AAFF, 0 0 6px #00AAFF, 0 0 7px #00AAFF, 0 0 8px #00AAFF;
-  }
-  to {
-    text-shadow: 0 0 2px #fff, 0 0 3px #003D66, 0 0 4px #003D66, 0 0 5px #003D66, 0 0 6px #003D66, 0 0 7px #003D66, 0 0 8px #003D66;
-  }
+    from {
+        text-shadow: 0 0 2px #00AAFF, 0 0 3px #00AAFF, 0 0 4px #00AAFF, 0 0 5px #00AAFF, 0 0 6px #00AAFF, 0 0 7px #00AAFF, 0 0 8px #00AAFF;
+    }
+    to {
+        text-shadow: 0 0 2px #fff, 0 0 3px #003D66, 0 0 4px #003D66, 0 0 5px #003D66, 0 0 6px #003D66, 0 0 7px #003D66, 0 0 8px #003D66;
+    }
 }
 
+/* Pour que la page soit responsive et fasse pas des trucs zarb sur ton écran */
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .title {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    header nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 0;
+        height: auto;
+    }
+
+    header p {
+        padding: 0 20px;
+        text-align: center;
+    }
+}

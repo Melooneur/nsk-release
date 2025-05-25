@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=fr> 
+<html lang="fr"> 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,35 +11,172 @@
 
 
     <body>
-        <header class="entete">
-                <a href="acceuil.html">
-                    <h1 class="title">
-                        <span class="title-orange">Neo  </span>
-                        <span class="title-blue">SkullKing</span>
-                    </h1>
-                </a>
-                
-                <p>By Armel Branchereau et Théo Cuzin</p>
-                
-                <div>
-                    <a href="sujet.html">
-                        <h3>NOTRE SUJET</h3>
-                    </a>
+        <header>
+            <a href="acceuil.html">
+                <h1 class="title">
+                    <span class="title-orange">Neo  </span>
+                    <span class="title-blue">SkullKing</span>
+                </h1>
+            </a>
             
-                    <a href="projet.html">
-                        <h3>NOTRE PROJET</h3>
-                    </a>
+            <p>By Armel Branchereau et Théo Cuzin</p>
 
-                    <a href="equipe.html">
-                        <h3>L'EQUIPE</h3>
-                    </a>
-                </div>
-
-
+            <nav>
+                    <a href="sujet.html"><h3>NOTRE SUJET</h3></a>
+                    <a href="projet.html"><h3>NOTRE PROJET</h3></a>
+                    <a href="equipe.html"><h3>L'EQUIPE</h3></a>
+            </nav>
         </header>
 
         <main>
             <div class="prst">
+                <h1>Du "Hello World" à la première itération de NSK</h1>
+                <br>
+                
+                <hr>
+                <br>
+                <p>
+                    Lorsque le projet nous a été confié nous avons commencé par concevoir la structure de données des cartes, avec une couleur et une valeur, et celle du joueur, contenant plusieurs
+                    variables utiles comme ses points, sa main, la carte qu'il a joué ou encore s'il est humain ou non. Ces deux structs furent - et sont encore - la base de notre boucle de jeu principale !
+                    En effet il nous a simplement suffi de transformer ces variables en tableaux dynamiques pour obtenir un deck complet de 70 cartes et une table autour de laquelle plusieurs joueurs, humains ou non
+                    peuvent se retrouver... 
+                </p>
+                <br>
+                
+                <div class="img-projet">
+                    <figure>
+                        <img src="nskv1.png" alt="NSK V1" width="650" height="350" class="equipe">
+                        <figcaption>Neo Skull King V1 - 30/04/2025</figcaption>
+                    </figure>
+                    <br>
+                    <figure>
+                        <img src="structC.png" alt="Struct des Cartes" width="650" height="350" class="equipe">
+                        <figcaption>La structure de données des cartes</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="joueurS.png" alt="Struct du Joueur" width="650" height="350" class="equipe">
+                        <figcaption>La structure de données du joueur</figcaption>
+                    </figure>
+                    <br>
+                </div>
+
+                <br>
+                <p>
+                    Il nous a fallu ensuite penser algorithme derrière une partie de Skull king, et le plus simple a été de jouer une partie en vrai et de découper le jeu en petites étapes simples à programmer en soit,
+                    la pioche, le pari à chaque manche, les tours qui composent chaque manche - un tour représentant un cycle autour de la table durant lequel chaque joueur pose la carte de son choix. Et bien sûr la répartition des points
+                    en fonction du pari préalable ! Tout cela marchait bien, ce n'était pas particulièrement beau, mais jouable, il y avait même déjà des joueurs IA - qui jouaient purement aléatoirement. Nous étions assez content du travail
+                    réalisé durant notre première semaine alors nous avons continué sur notre lancée...
+                </p>
+
+                <br>
+                <hr>
+                <br>
+
+                <h1>"Joueur 1 est connecté au serveur !"</h1>
+
+                <br>
+                <hr>
+                <br>
+
+                <p>
+                    L'un des défauts majeurs de notre implémentation de Skull King était le fait que tous les joueurs pouvaient voir les mains de tout le monde, puisque tout le monde jouait sur la même fenêtre de terminal à tour de rôle,
+                    certes ça marchait, mais ce n'était pas optimal, et c'est à ce moment là que Théo eut l'idée un peu folle de rendre Neo Skull King jouable en LAN... Pour faire court, et après un peu de sorcellerie et de bidouillage réseau avec la bibliothèque ASIO
+                    NSK online edition première du nom était née ! Le jeu était entièrement géré par le serveur, les clients ne servaient que d'interface pour afficher les messages transmis par le serveur, et ponctuellement, de moyen de saisie. Tout marchait pour le mieux
+                </p>
+
+                <div class="img-projet">
+                    <figure>
+                        <img src="nskv2.png" alt="Première itération du serveur" width="650" height="350" class="equipe">
+                        <figcaption>La première itération du serveur NSK - 08/05/2025</figcaption>
+                    </figure>
+                    <br>
+                    <figure>
+                        <img src="boucleR.png" alt="Boucle envoi coté client" width="650" height="350" class="equipe">
+                        <figcaption>L'unique boucle sur laquelle reposait la communication côté client</figcaption>
+                    </figure>
+                    <br>
+                </div>
+
+                <p>
+                    De son côté Armel travailla à comprendre (et déjà installer) la bibliothèque SFML pour construire l'interface graphique du jeu ! Armé de beaucoup de patience et de persévérance, il réussit durant la deuxième semaine à faire l'animation de chargement iconique,
+                    et les prémices du jeu en version graphique
+                </p>
+
+                <br>
+                <hr>
+                <br>
+
+                <h1>AI-Robot et l'interface graphique</h1>
+
+                <br>
+                <hr>
+                <br>
+
+                <p>
+                    La troisième semaine marqua le terme du développement de la première itération de la version graphique de Néo Skull King, Armel ayant terminé toutes les fonctions critiques à l'affichage et à la gestion des joueurs avec cette nouvelle interface graphique.
+                </p>
+
+                <div class="img-projet">
+                    <figure>
+                        <img src="nskv3.png" alt="NSK V3" width="650" height="350" class="equipe">
+                        <figcaption>Les prémices de l'interface graphique, à noter le bouton "offline" qui ne marche pas encore - 15/04/2025</figcaption>
+                    </figure>
+                    <br>
+                    <figure>
+                        <img src="puissance.PNG" alt="Fonction Puissance" width="650" height="350" class="equipe">
+                        <figcaption>La fonction puissance décrite ci-dessous</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="gambleCPU.PNG" alt="Fonction gambleCPU" width="650" height="350" class="equipe">
+                        <figcaption>La fonction de pari des IA</figcaption>
+                    </figure>
+                    <br>
+                </div>
+
+                <p>
+                    De son côté Théo travailla à nouveau sur les IA, s'inspirant de la manière dont ses jeux de stratégie préférés gèrent la dangerosité des ennemis par rapport aux IA, il mit en place un système astucieux de puissance - une moyenne de la force des cartes
+                    pondérée par la valeur de celles-ci si elles en ont - et un comportement variable d'une IA à l'autre rendant certains adversaires nerveux et agressifs tandis que d'autres sont calmes et plus "chill".
+                </p>
+
+                <br>
+                <hr>
+                <br>
+
+                <h1>Fusion...</h1>
+
+                <br>
+                <hr>
+                <br>
+
+                <p>
+                    La quatrième et dernière semaine de développement fut marquée par la tant attendue fusion de la partie graphique et réseau... Une fusion qui connut son lot de désagréments, dont un majeur, la façon de gérer l'interaction client/serveur. En effet une interface graphique suppose
+                    un minimun d'éléments à afficher, éléments qui n'étaient auparavant pas communiqués au client par le serveur. Le problème étant que le serveur ne peut communiquer que des données dites "basique" soit des entiers, des caractères, des boolées... On est bien loin des
+                    structures de données et des tableaux dynamiques qui sont la fondation même de NSK... Une première solution fut imaginée et consistait à utiliser des codes réseau et à les coder/décoder entre le serveur et le client, si sur le papier le concept marchait à 100%
+                    l'implémentation en C++ n'aboutit jamais, et après plus de 10h d'essais et d'erreurs, une autre approche fut envisagée. Il fut alors décidé d'envoyer une partie non négligeable de la structure du joueur a chacun des clients, bien moins optimisé, et surtout
+                    bien moins simple à réaliser, c'est pour cela que nos deux développeurs ont employé ChatGPT pour les aider à écrire un code de communication fiable capable de transmettre et reconstruire ces structures de données cruciales pour l'affichage !
+                </p>
+
+                <div class="img-projet">
+                    <figure>
+                        <img src="minimapserv.png" alt="Minimap code Serveur" width="230" height="350" class="equipe">
+                        <figcaption>La "minimap" du code final du serveur</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="nskfinal.PNG" alt="NSK Version Finale" width="650" height="350" class="equipe">
+                        <figcaption>Neo Skull King 1.0 - 23/04/2025</figcaption>
+                    </figure>
+                    <br>
+                    <figure>
+                        <img src="codereseau.jpg" alt="Codes Réseau" width="230" height="350" class="equipe">
+                        <figcaption>Les codes réseau abandonnés</figcaption>
+                    </figure>
+                    <br>
+                </div>
+
+                <p>
+                    Et c'est ainsi qu'après plus de 3500 lignes de codes, un mois de travail acharné, deux trois nuits blanches, et une belle identité graphique toute neuve générée par IA que Neo Skull King sortit enfin de sa phase alpha pour être jouable par le plus grand nombre !
+                    A la base une simple ébauche sur papier, le projet à rapidement grandi en ampleur et en fonctionnalités, et nous sommes aujourd'hui fier du résultat final, et nous espérons que vous apprécierez vos parties de NSK ! - Armel & Théo
+                </p>
 
             </div>
 
