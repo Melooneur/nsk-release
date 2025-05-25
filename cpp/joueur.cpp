@@ -133,7 +133,7 @@ void attribution_point(table t,int nbj,int manche)
         t[i].pointgagne = 0; // On remet à 0 les points gagnés
         if (t[i].parie==0) //si parie 0
         {
-            if (t[i].plit==0)
+            if (t[i].plit==0)//parie == 0
             {
                 t[i].point+=10*manche; //gagne
                 t[i].pointgagne=10*manche;
@@ -151,7 +151,7 @@ void attribution_point(table t,int nbj,int manche)
             if (t[i].plit==t[i].parie)
             { 
                 t[i].point+=t[i].parie*20;                  //gagne
-                t[i].pointgagne=10*t[i].parie;
+                t[i].pointgagne=20*t[i].parie;
                 cout<< "Joueur " << i+1 << " a gagne " << t[i].parie*20 << " points" << endl;
             }
             else

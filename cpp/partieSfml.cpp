@@ -60,7 +60,7 @@ void title(RenderWindow& window)
     // Affiche le titre
     
     Font font;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     Text titre1("Neo Skull King", font, 100);
     Text titre2("Neo Skull King", font, 100);
 
@@ -81,7 +81,7 @@ void SelectMenu(RenderWindow& window,int& buttonSel,int& nbj,int& nbot,bool line
     // Affiche les différents menus
     
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
 
     window.clear();
@@ -148,9 +148,9 @@ void SelectMenu(RenderWindow& window,int& buttonSel,int& nbj,int& nbot,bool line
         Text Jouer("PLAY",font,60);
 
         nbPlayer.setPosition(150,250);
-        joueur.setPosition(540,240);
+        joueur.setPosition(560,250);
         nbBot.setPosition(150,400);
-        bot.setPosition(540,390);
+        bot.setPosition(560,400);
         retour.setPosition(800,600);
         Jouer.setPosition(380,600);
 
@@ -194,7 +194,7 @@ void SelectMenu(RenderWindow& window,int& buttonSel,int& nbj,int& nbot,bool line
 
 
 
-        window.clear();
+        
 
 
 
@@ -222,7 +222,6 @@ void SelectMenu(RenderWindow& window,int& buttonSel,int& nbj,int& nbot,bool line
     }
 
     title(window); // remet le titre
-    window.display();
 }
 
 
@@ -263,10 +262,11 @@ void menu(RenderWindow& window,int &nbj,int& nbot,bool &line, bool &jouer,bool &
     title(window); // Affiche le titre
     SelectMenu(window,buttonSel,nbj,nbot,line); // Affiche les textes du menu + le selectionner est mis en surbrillance
 
+    window.display(); // Affiche le menu
     sf::Event event;
 
-
-
+    Font font;
+    font.loadFromFile("../assets/NeoNeon.ttf"); 
 
     while(window.isOpen() && !jouer && !fin)
     {
@@ -342,9 +342,21 @@ void menu(RenderWindow& window,int &nbj,int& nbot,bool &line, bool &jouer,bool &
 
                 else if(buttonSel>10)
                 {}
+                window.clear();
                 
                 SelectMenu(window,buttonSel,nbj,nbot,line);
                 
+
+
+                if (nbot+nbj<2) // si il y a moins de 2 joueurs
+                {
+                    Text erreur("Il faut au moins deux joueurs/bot !",font,35);
+                    erreur.setFillColor(sf::Color::Red);
+                    erreur.setPosition((LARGEUR_FENETRE-erreur.getLocalBounds().width)/2,HAUTEUR_FENETRE/2-20);
+                    window.draw(erreur);
+                    jouer=false; // ne demare pas la partie
+                }
+                window.display(); //affiche le menu
             }
         }      
     }
@@ -365,14 +377,14 @@ void menu(RenderWindow& window,int &nbj,int& nbot,bool &line, bool &jouer,bool &
 void afficheManche(RenderWindow &window,int manche)    //affiche "Manche ..."
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
     Text Manche("Manche ",font,50);
     Text num(std::to_string(manche),djv,50);
     num.setScale(1.1,1.1);
 
-    Manche.setPosition(1050,10);
-    num.setPosition(1350,0);
+    Manche.setPosition(LARGEUR_FENETRE/3*4,10);
+    num.setPosition(LARGEUR_FENETRE/3*4 + Manche.getLocalBounds().width,0);
 
     window.draw(Manche);
     window.draw(num);
@@ -488,12 +500,12 @@ void afficheC(RenderWindow &window,int nbCarte,joueur j)
 void SfmlafficheJ(RenderWindow &window,int numJ)    //affiche "Joueur ..."
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
     Text joueur("Joueur :",font,50);
     Text num(std::to_string(numJ+1),djv,50);
     joueur.setPosition(10,10);
-    num.setPosition(350,0);
+    num.setPosition(20 + joueur.getLocalBounds().width,10);
 
     window.draw(joueur);
     window.draw(num);
@@ -503,7 +515,7 @@ void SfmlafficheJ(RenderWindow &window,int numJ)    //affiche "Joueur ..."
 void afficheJG(RenderWindow &window,int numJ,int manche)    //affiche "Joueur ... a gagné"
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
     Text joueur("Joueur      a gagne le tour ",font,50);
     Text num(std::to_string(numJ+1),djv,50);
@@ -511,10 +523,11 @@ void afficheJG(RenderWindow &window,int numJ,int manche)    //affiche "Joueur ..
 
     sf::FloatRect bounds = joueur.getLocalBounds();
     joueur.setPosition((LARGEUR_FENETRE-bounds.width)/2,(HAUTEUR_FENETRE/4)*3);
+    joueur.setScale(0.75,0.75);
     num.setScale(1.25,1.25);  
     mancheT.setScale(1.25,1.25);
 
-    num.setPosition((LARGEUR_FENETRE-bounds.width)/2+325,(HAUTEUR_FENETRE/4)*3-10);
+    num.setPosition((LARGEUR_FENETRE-bounds.width/2) + bounds.width/3,(HAUTEUR_FENETRE/4)*3-10);
     mancheT.setPosition((LARGEUR_FENETRE-bounds.width)/2+bounds.width,(HAUTEUR_FENETRE/4)*3-10);
     
     afficheFond(window); //affiche le fond d'écran
@@ -532,7 +545,7 @@ void afficheG(RenderWindow &window,int nbParie,int manche,int numJ,joueur j)
     afficheC(window,manche,j);
     SfmlafficheJ(window,numJ);
     Font djv,font;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
 
     Text gambling("Pari",font,50);
@@ -758,7 +771,7 @@ int maxP(table t,int nbj)
 void affichePoint(RenderWindow &window,int nbj,table t)
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
     Text joueur("Joueur    :",font,50);
     Text num(std::to_string(1),djv,50);
@@ -777,58 +790,82 @@ void affichePoint(RenderWindow &window,int nbj,table t)
     int cptr=0;
     int pointM=maxP(t,nbj);
 
-
+    joueur.setScale(0.75,0.75);
+    num.setScale(0.75,0.75);
 
     while(cptr<=pointM)
     {    
         window.clear();
         afficheFond(window);
+        int x=20,y=20;
         for (int i=0;i<nbj;i++)
         {
-            joueur.setPosition(310,400+i*100);
-            num.setPosition(650,400+i*100);
+            joueur.setPosition(x,y);
+            num.setPosition(x+joueur.getLocalBounds().width/3*2-num.getLocalBounds().width,y);
             num.setString(std::to_string(i+1));
+            if (i%2)
+            {
+                x=20;
+                y+=100;
+            }
+            else 
+            {
+                x=LARGEUR_FENETRE/2;
+
+            }
 
             
             window.draw(joueur);
             window.draw(num);
         }
 
+        y=20;
+        x=20+joueur.getLocalBounds().width;
         for(int i=0;i<nbj;i++)
         {
+            Text point("0",djv,50);
             int pointJ=t[i].point-t[i].pointgagne;
 
             if(t[i].pointgagne>0)
             { 
                 if (t[i].pointgagne<=cptr)
                 {
-                    Text point(std::to_string(t[i].point), djv, 50);
-                    point.setPosition(980,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(t[i].point));
                 } 
                 else
                 {         
-                    Text point(std::to_string(pointJ+cptr), djv, 50);
-                    point.setPosition(980,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(pointJ+cptr));
+                    
                 }
             }
             else if (t[i].pointgagne<=0)
             {
                 if (t[i].pointgagne>=-cptr)
                 {
-                    Text point(std::to_string(t[i].point), djv, 50);
-                    point.setPosition(980,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(t[i].point));
+                    
                 } 
                 else
                 {
-                    Text point(std::to_string(pointJ-cptr), djv, 50);
-                    point.setPosition(980,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(pointJ-cptr));
+                    
                 }
             }
+            point.setPosition(x,y);
+            window.draw(point);
+            if(i%2!=0)
+            {
+                x=20+joueur.getLocalBounds().width;
+                y+=100;
+            }
+            else 
+            {
+                x=LARGEUR_FENETRE/2 + joueur.getLocalBounds().width;
+                
+            }
+
         }
+
         window.display();
         if(cptr!=0) sleep(milliseconds(3000/pointM));
         cptr++;
@@ -841,7 +878,7 @@ void affichePoint(RenderWindow &window,int nbj,table t)
 void choixTigresse(RenderWindow &window,bool tigresse)
 {
     Font font;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
 
     Text fuite("Fuite",font,50);
     Text pirate("Pirate",font,50);
@@ -877,7 +914,7 @@ bool tigresse (RenderWindow &window)
     afficheFond(window); //affiche le fond d'écran
     window.display();
     Font font;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
 
     Image fuite;
     Image pirate;
@@ -936,7 +973,7 @@ bool tigresse (RenderWindow &window)
 void afficheFinOffline(RenderWindow &window,int nbj,table t,bool blue)
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
 
 

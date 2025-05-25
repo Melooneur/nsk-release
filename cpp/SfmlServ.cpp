@@ -13,14 +13,14 @@ using namespace std;
 void afficheM(RenderWindow &window,int manche)    //affiche "Manche ..."
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
     Text Manche("Manche ",font,50);
     Text num(std::to_string(manche),djv,50);
     num.setScale(1.1,1.1);
 
-    Manche.setPosition(1050,10);
-    num.setPosition(1350,0);
+    Manche.setPosition(LARGEUR_FENETRE/3*4,10);
+    num.setPosition(LARGEUR_FENETRE/3*4 + Manche.getLocalBounds().width,0);
 
     window.draw(Manche);
     window.draw(num);
@@ -239,7 +239,7 @@ void afficheGamble(RenderWindow &window,int nbParie,int manche,deck d)    //affi
 
 
     Font djv,font;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
 
     Text gambling("Pari",font,50);
@@ -386,7 +386,7 @@ int maxPServ(pseudoTable t,int nbj)
 void affichePointServ(RenderWindow &window,int nbj,pseudoTable t)
 {
     Font font,djv;
-    font.loadFromFile("../assets/neonFont.ttf");
+    font.loadFromFile("../assets/NeoNeon.ttf");
     djv.loadFromFile("../assets/DejaVuSerif.ttf");
     Text joueur("Joueur    :",font,50);
     Text num(std::to_string(1),djv,50);
@@ -405,58 +405,83 @@ void affichePointServ(RenderWindow &window,int nbj,pseudoTable t)
     int cptr=0;
     int pointM=maxPServ(t,nbj);
 
+    joueur.setScale(0.75,0.75);
+    num.setScale(0.75,0.75);
 
 
-    while(cptr<=pointM)
+     while(cptr<=pointM)
     {    
         window.clear();
         afficheFond(window);
+        int x=20,y=20;
         for (int i=0;i<nbj;i++)
         {
-            joueur.setPosition(310,400+i*100);
-            num.setPosition(650,400+i*100);
+            joueur.setPosition(x,y);
+            num.setPosition(x+joueur.getLocalBounds().width/3*2-num.getLocalBounds().width,y);
             num.setString(std::to_string(i+1));
+            if (i%2)
+            {
+                x=20;
+                y+=100;
+            }
+            else 
+            {
+                x=LARGEUR_FENETRE/2;
+
+            }
 
             
             window.draw(joueur);
             window.draw(num);
         }
 
+        y=20;
+        x=20+joueur.getLocalBounds().width;
         for(int i=0;i<nbj;i++)
         {
+            Text point("0",djv,50);
             int pointJ=t[i].point-t[i].pointgagne;
 
             if(t[i].pointgagne>0)
             { 
                 if (t[i].pointgagne<=cptr)
                 {
-                    Text point(std::to_string(t[i].point), djv, 50);
-                    point.setPosition(1000,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(t[i].point));
                 } 
                 else
                 {         
-                    Text point(std::to_string(pointJ+cptr), djv, 50);
-                    point.setPosition(1000,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(pointJ+cptr));
+                    
                 }
             }
             else if (t[i].pointgagne<=0)
             {
                 if (t[i].pointgagne>=-cptr)
                 {
-                    Text point(std::to_string(t[i].point), djv, 50);
-                    point.setPosition(980,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(t[i].point));
+                    
                 } 
                 else
                 {
-                    Text point(std::to_string(pointJ-cptr), djv, 50);
-                    point.setPosition(980,400+i*100);
-                    window.draw(point);
+                    point.setString(std::to_string(pointJ-cptr));
+                    
                 }
             }
+            point.setPosition(x,y);
+            window.draw(point);
+            if(i%2!=0)
+            {
+                x=20+joueur.getLocalBounds().width;
+                y+=100;
+            }
+            else 
+            {
+                x=LARGEUR_FENETRE/2 + joueur.getLocalBounds().width;
+                
+            }
+
         }
+
         window.display();
         if(cptr!=0) sleep(milliseconds(3000/pointM));
         cptr++;
@@ -468,7 +493,7 @@ void affichePointServ(RenderWindow &window,int nbj,pseudoTable t)
 void afficheFin(RenderWindow &window,int nbj,pseudoTable t,bool blue)
 {
     Font font,djv;
-    font.loadFromFile("../neonFont.ttf");
+    font.loadFromFile("../NeoNeon.ttf");
     djv.loadFromFile("../DejaVuSerif.ttf");
 
 
