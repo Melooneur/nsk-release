@@ -19,15 +19,14 @@ add_definitions(-DASIO_STANDALONE -D_WIN32_WINNT=0x0601)
 
 # === SOURCES COMMUNES ===
 set(COMMON_SRC
-    deck.cpp
-    joueur.cpp
-    jeu.cpp
-    affichage.cpp
-    partie.cpp
-    jcpu.cpp
-    partieSfml.cpp
-    network.cpp
-    SfmlServ.cpp
+    cpp/deck.cpp
+    cpp/joueur.cpp
+    cpp/jeu.cpp
+    cpp/partie.cpp
+    cpp/jcpu.cpp
+    cpp/partieSfml.cpp
+    cpp/network.cpp
+    cpp/SfmlServ.cpp
 )
 
 # === CLIENT ===
@@ -40,14 +39,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 # === SERVEUR ===
 add_executable(${PROJECT_NAME}-serveur
-    server/server.cpp
-    partie.cpp
-    joueur.cpp
-    deck.cpp
-    affichage.cpp
-    jcpu.cpp
-    partieSfml.cpp
-    SfmlServ.cpp
+    cpp/server/server.cpp
+    cpp/partie.cpp
+    cpp/joueur.cpp
+    cpp/deck.cpp
+    cpp/jcpu.cpp
+    cpp/partieSfml.cpp
+    cpp/SfmlServ.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}-serveur PRIVATE
