@@ -103,10 +103,10 @@ void joue(deck &d, int &taille, table &t, int nbj, int manche,sf::RenderWindow &
         num = verifGagnant(t,nbj,num); // Le gagnant a +1 plit
 
         window.clear();
-        afficheTable(window,num,t,nbj,cptr); // Affiche la table de jeu
-        afficheJG(window,num,i+1); // Affiche le gagnant du tour
+        afficheJG(window, num, i+1); // Affiche le gagnant du tour
+        afficheTable(window, num, t, nbj, cptr); // Affiche la table de jeu
         window.display();
-        sf::sleep(sf::seconds(1)); //5sec pour voir les cartes
+        sf::sleep(sf::seconds(2)); //5sec pour voir les cartes
         
         
     

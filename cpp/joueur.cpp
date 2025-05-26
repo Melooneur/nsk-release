@@ -23,7 +23,7 @@ void clear_j(table & t, int nb)
     for(int i = 0; i < nb; i++)
     {
         delete[] t[i].mainJoueur;
-        t = nullptr;
+        t[i].mainJoueur = nullptr;
     }
     
     delete[] t;

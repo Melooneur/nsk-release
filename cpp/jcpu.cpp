@@ -153,13 +153,7 @@ int joueCPU(deck &d, int joueurActif, int &taille, table &t, int manche, int i, 
     }
 
     joueur jActif = t[joueurActif];
-    float comportement = t[joueurActif].comportementCPU;
-    /*
-    COMPORTEMENTS :
-    < 1 - Prudent
-    = 1 - Equilibré
-    > 1 - Agressif
-    */
+    
     float prob = ((jActif.parie-jActif.plit) / float(manche - i + 1)); // Calcule la probabilité que l'IA doive jouer ce tour-ci
     cout << "prob :" << prob;
     float puissT = puissanceTable(t,nbj);

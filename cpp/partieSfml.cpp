@@ -268,6 +268,8 @@ void menu(RenderWindow& window,int &nbj,int& nbot,bool &line, bool &jouer,bool &
     Font font;
     font.loadFromFile("../assets/NeoNeon.ttf"); 
 
+    while(window.pollEvent(event)) {}
+
     while(window.isOpen() && !jouer && !fin)
     {
         while(window.pollEvent(event) && !jouer && !fin)//tant qu'un evenement est produit
@@ -522,18 +524,21 @@ void afficheJG(RenderWindow &window,int numJ,int manche)    //affiche "Joueur ..
     Text mancheT(std::to_string(manche),djv,50);
 
     sf::FloatRect bounds = joueur.getLocalBounds();
-    joueur.setPosition((LARGEUR_FENETRE-bounds.width)/2,(HAUTEUR_FENETRE/4)*3);
+    joueur.setPosition((LARGEUR_FENETRE)/2,(HAUTEUR_FENETRE/4)*3);
     joueur.setScale(0.75,0.75);
-    num.setScale(1.25,1.25);  
-    mancheT.setScale(1.25,1.25);
+    num.setScale(1,1);  
+    mancheT.setScale(1,1);
 
-    num.setPosition((LARGEUR_FENETRE-bounds.width/2) + bounds.width/3,(HAUTEUR_FENETRE/4)*3-10);
-    mancheT.setPosition((LARGEUR_FENETRE-bounds.width)/2+bounds.width,(HAUTEUR_FENETRE/4)*3-10);
+    joueur.setOrigin(bounds.width/2,bounds.height/2);
+
+
+    num.setPosition((LARGEUR_FENETRE)/2 - bounds.width/7 -10,(HAUTEUR_FENETRE/4)*3 - bounds.height/2);
+    mancheT.setPosition((LARGEUR_FENETRE)/2 + bounds.width/5*2,(HAUTEUR_FENETRE/4)*3 - bounds.height/2);
     
     afficheFond(window); //affiche le fond d'écran
     window.draw(joueur);
-    window.draw(num);
-    window.draw(mancheT);
+    window.draw(num);                                                                                                                           
+    window.draw(mancheT);                                                                                            
 
 }
 
@@ -542,7 +547,7 @@ void afficheG(RenderWindow &window,int nbParie,int manche,int numJ,joueur j)
     // Affiche le pari
 
     afficheManche(window,manche);
-    afficheC(window,manche,j);
+    afficheC(window,manche,j);                                                                                                                                                                                                                  
     SfmlafficheJ(window,numJ);
     Font djv,font;
     font.loadFromFile("../assets/NeoNeon.ttf");
@@ -644,6 +649,7 @@ void afficheTable(RenderWindow &window,int numJ,table t,int nbj,int cptr) //cart
             cartePos+=taille.x*carteSize;
         }
     }
+    
 
 }
 
@@ -819,7 +825,7 @@ void affichePoint(RenderWindow &window,int nbj,table t)
             window.draw(num);
         }
 
-        y=20;
+        y=10;
         x=20+joueur.getLocalBounds().width;
         for(int i=0;i<nbj;i++)
         {

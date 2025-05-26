@@ -483,7 +483,7 @@ void affichePointServ(RenderWindow &window,int nbj,pseudoTable t)
         }
 
         window.display();
-        if(cptr!=0) sleep(milliseconds(3000/pointM));
+        if(cptr!=0) sleep(milliseconds(3000/(pointM*pointM)));
         cptr++;
         
     }

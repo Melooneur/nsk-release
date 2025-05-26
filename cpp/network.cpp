@@ -427,9 +427,8 @@ void connectToServer(sf::RenderWindow& window)
 
 
                     window.clear();
-                    afficheFond(window);
-                    afficheTable(window, compterCartesActives(tableJ,nbj), tableJ, nbj);
                     afficheJG(window, numJ, tour+1);
+                    afficheTable(window, compterCartesActives(tableJ,nbj), tableJ, nbj);
                     window.display();
                     sf::sleep(sf::seconds(2)); //5sec pour voir les cartes
                    
